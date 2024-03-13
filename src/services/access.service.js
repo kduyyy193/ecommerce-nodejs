@@ -6,6 +6,7 @@ const crypto = require('crypto')
 const KeyTokenService = require("./keyToken.service")
 const { createTokenPair } = require("../auth/authUtils")
 const { getInfoData } = require("../utils")
+const { BadRequestError } = require("../core/error.response")
 
 const RoleShop = {
     'SHOP': '0001',
@@ -21,10 +22,7 @@ class AccessService {
             // Check email exist
             const hodelShop = await shopModel.findOne({ email }).lean()
             if (hodelShop) {
-                return {
-                    code: 'xxx',
-                    message: 'Shop already registerd!'
-                }
+                throw new BadRequestError('Error: Shop already registered')
             }
             // Regular expressions to check for special characters, uppercase letters, and numbers
             const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
