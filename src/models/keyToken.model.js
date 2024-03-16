@@ -16,9 +16,13 @@ var keyTokenSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    refreshToken: {
+    refreshTokenUsed: {
         type: Array,
         default: [],
+    },
+    refreshToken: {
+        type: String,
+        required: true,
     },
 }, {
     collation: COLLECTION_NAME,
